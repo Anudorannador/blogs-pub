@@ -1,0 +1,80 @@
+<svg viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Asset statistics pipeline system map">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c3aed" />
+      <stop offset="0.55" stop-color="#22c55e" />
+      <stop offset="1" stop-color="#06b6d4" />
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+    </marker>
+    <style>
+      .box { fill:#0b1220; stroke:#334155; stroke-width:2; }
+      .title { fill:#e2e8f0; font: 700 16px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      .text { fill:#cbd5e1; font: 13px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      .muted { fill:#94a3b8; font: 12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      .wire { stroke:#94a3b8; stroke-width:2.5; fill:none; marker-end:url(#arrow); }
+      .wireHot { stroke:url(#grad); stroke-width:3.5; fill:none; stroke-dasharray:8 6; stroke-dashoffset:0; marker-end:url(#arrow); animation: dash 1.8s linear infinite; }
+
+      @keyframes dash {
+        to { stroke-dashoffset: -28; }
+      }
+    </style>
+  </defs>
+
+  <!-- Column 1: Inputs -->
+  <rect class="box" x="30" y="40" rx="16" width="250" height="140" />
+  <text class="title" x="55" y="72">Inputs (Untrusted)</text>
+  <text class="text" x="55" y="100">• Internal subsystems</text>
+  <text class="text" x="55" y="122">• Settlement/clearing files</text>
+  <text class="text" x="55" y="144">• Historical backfills</text>
+  <text class="muted" x="55" y="170">Dirty data is normal, not rare.</text>
+
+  <!-- Column 2: Validation -->
+  <rect class="box" x="330" y="40" rx="16" width="280" height="140" />
+  <text class="title" x="355" y="72">Defend Correctness</text>
+  <text class="text" x="355" y="100">• Provenance + versioning</text>
+  <text class="text" x="355" y="122">• Reconciliation + invariants</text>
+  <text class="text" x="355" y="144">• Schema completeness checks</text>
+  <text class="muted" x="355" y="170">A number without context is not evidence.</text>
+
+  <!-- Column 3: Computation layers -->
+  <rect class="box" x="660" y="40" rx="16" width="410" height="140" />
+  <text class="title" x="685" y="72">Pipeline (Layered)</text>
+  <text class="text" x="685" y="100">Checkpoint A (persist) → Checkpoint B (persist) → Final metrics</text>
+  <text class="text" x="685" y="124">Timezone/business-date rules must be explicit</text>
+  <text class="muted" x="685" y="150">Store strategic checkpoints to make debugging scalable.</text>
+
+  <!-- Row 2: Investigation tooling -->
+  <rect class="box" x="330" y="230" rx="16" width="360" height="150" />
+  <text class="title" x="355" y="262">Investigation Tooling</text>
+  <text class="text" x="355" y="290">Audit export (per user / per date)</text>
+  <text class="text" x="355" y="312">→ diff checkpoint values</text>
+  <text class="text" x="355" y="334">→ find first divergent layer</text>
+  <text class="muted" x="355" y="360">Compress human time per investigation.</text>
+
+  <!-- Row 2: Operational safety -->
+  <rect class="box" x="720" y="230" rx="16" width="350" height="150" />
+  <text class="title" x="745" y="262">Operational Safety</text>
+  <text class="text" x="745" y="290">Shadow environment: validate on real-like data</text>
+  <text class="text" x="745" y="312">Data patches over in-code one-offs</text>
+  <text class="text" x="745" y="334">Monitoring: distribution shifts (10%, 20%, …)</text>
+  <text class="muted" x="745" y="360">Cheap early warning beats user tickets.</text>
+
+  <!-- Publish / privacy boundary -->
+  <rect class="box" x="30" y="230" rx="16" width="250" height="150" />
+  <text class="title" x="55" y="262">Publishing Boundary</text>
+  <text class="text" x="55" y="290">Public outputs must be safe</text>
+  <text class="text" x="55" y="312">Redact &lt;Sensitive&gt; fragments</text>
+  <text class="text" x="55" y="334">Least privilege + audit logs</text>
+  <text class="muted" x="55" y="360">Privacy constraints are real constraints.</text>
+
+  <!-- Wires -->
+  <path class="wireHot" d="M 280 110 L 330 110" />
+  <path class="wireHot" d="M 610 110 L 660 110" />
+
+  <path class="wire" d="M 515 180 L 515 230" />
+  <path class="wire" d="M 865 180 L 865 230" />
+  <path class="wire" d="M 280 305 L 330 305" />
+
+</svg>
