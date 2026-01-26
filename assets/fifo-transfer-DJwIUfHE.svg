@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap');
+      
+      .bg { fill: #ffffff; }
+      
+      /* Tracks */
+      .track-a { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 2; rx: 10; }
+      .track-b { fill: #f0fdf4; stroke: #86efac; stroke-width: 2; rx: 10; }
+      .label-a { font-size: 14px; font-weight: bold; fill: #64748b; font-family: 'Inter', sans-serif; }
+      .label-b { font-size: 14px; font-weight: bold; fill: #16a34a; font-family: 'Inter', sans-serif; }
+      
+      /* Lots */
+      .lot-btc { fill: #ffedd5; stroke: #ea580c; stroke-width: 2; rx: 6; }
+      .lot-fee { fill: #fee2e2; stroke: #ef4444; stroke-width: 2; rx: 6; stroke-dasharray: 4; }
+      
+      .text-qty { font-family: 'Inter', sans-serif; font-weight: bold; font-size: 16px; fill: #9a3412; }
+      .text-fee { font-family: 'Inter', sans-serif; font-weight: bold; font-size: 14px; fill: #b91c1c; }
+      .text-basis { font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.8; fill: #9a3412; }
+      
+      /* Arrows */
+      .arrow { fill: none; stroke: #cbd5e1; stroke-width: 3; marker-end: url(#arrowHead); }
+      .arrow-fee { fill: none; stroke: #ef4444; stroke-width: 2; marker-end: url(#arrowHeadRed); stroke-dasharray: 4; }
+      
+      /* Calc Boxes */
+      .calc-box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1; rx: 4; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.05)); }
+      .calc-title { font-size: 12px; font-weight: bold; fill: #64748b; font-family: 'Inter', sans-serif; }
+      .calc-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; fill: #334155; }
+      .val-pos { fill: #166534; font-weight: bold; }
+      .val-neg { fill: #b91c1c; font-weight: bold; }
+      
+      /* Main Sections */
+      .section-title { font-size: 18px; font-weight: bold; fill: #0f172a; font-family: 'Inter', sans-serif; }
+
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#cbd5e1" />
+    </marker>
+    <marker id="arrowHeadRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444" />
+    </marker>
+  </defs>
+
+  <rect width="1000" height="600" class="bg" />
+  
+  <text x="50" y="40" font-size="24" font-weight="bold" font-family="sans-serif" fill="#0f172a">Transfer with Fee: A to B</text>
+
+  <!-- ========================
+       SECTION 1: Exchange A
+       ======================== -->
+  <g transform="translate(50, 80)">
+    <text x="0" y="20" class="section-title">1. Exchange A (Buy)</text>
+    
+    <!-- Track A -->
+    <rect x="200" y="0" width="300" height="70" class="track-a" />
+    <text x="210" y="40" class="label-a">EXCHANGE A</text>
+    
+    <!-- Lot 1.0 BTC -->
+    <g transform="translate(350, 10)">
+      <rect width="130" height="50" class="lot-btc" />
+      <text x="65" y="20" text-anchor="middle" class="text-qty">1.0 BTC</text>
+      <text x="65" y="40" text-anchor="middle" class="text-basis">Basis $10k</text>
+    </g>
+    
+    <!-- Math: Initial Cost -->
+    <g transform="translate(600, 10)">
+      <text x="10" y="20" class="calc-val" fill="#64748b">Cash Spent: $10,000</text>
+    </g>
+  </g>
+
+  <!-- ========================
+       SECTION 2: The Transfer
+       ======================== -->
+  <g transform="translate(50, 220)">
+    <text x="0" y="20" class="section-title">2. Transfer &amp; Fee</text>
+    
+    <!-- Path from A to B -->
+    <path d="M 415 -60 L 415 80" class="arrow" />
+    
+    <!-- The Split visual center -->
+    <circle cx="415" cy="40" r="6" fill="#cbd5e1" />
+    
+    <!-- Main flow continues down -->
+    <text x="430" y="60" font-size="12" fill="#64748b" font-weight="bold">0.9 BTC arrives</text>
+
+    <!-- Fee flow branches right -->
+    <path d="M 415 40 L 550 40" class="arrow-fee" />
+    
+    <!-- Fee Lot -->
+    <g transform="translate(560, 15)">
+      <rect width="100" height="50" class="lot-fee" />
+      <text x="50" y="20" text-anchor="middle" class="text-fee">0.1 BTC</text>
+      <text x="50" y="40" text-anchor="middle" class="text-basis" fill="#ef4444">FEE</text>
+    </g>
+    
+    <!-- Fee PnL Box -->
+    <g transform="translate(700, 10)">
+      <rect width="200" height="60" class="calc-box" />
+      <text x="10" y="20" class="calc-title">FEE DISPOSAL (Expense)</text>
+      <text x="10" y="35" class="calc-val">Basis: 0.1 * $10k = $1k</text>
+      <text x="10" y="50" class="calc-val val-neg">Realized Loss: -$1,000</text> <!-- Technically expense/loss -->
+    </g>
+  </g>
+
+  <!-- ========================
+       SECTION 3: Exchange B
+       ======================== -->
+  <g transform="translate(50, 350)">
+    <text x="0" y="20" class="section-title">3. Exchange B (Sell)</text>
+    
+    <!-- Track B -->
+    <rect x="200" y="0" width="300" height="70" class="track-b" />
+    <text x="210" y="40" class="label-b">EXCHANGE B</text>
+    
+    <!-- Arrived Lot 0.9 BTC -->
+    <!-- Positioned ready to sell -->
+    <g transform="translate(350, 10)">
+      <rect width="130" height="50" class="lot-btc" />
+      <text x="65" y="20" text-anchor="middle" class="text-qty">0.9 BTC</text>
+      <text x="65" y="40" text-anchor="middle" class="text-basis">Basis $9k</text>
+    </g>
+    
+    <!-- Sell Arrow -->
+    <path d="M 480 35 L 560 35" class="arrow" />
+    <text x="520" y="25" font-size="12" fill="#64748b" text-anchor="middle">SOLD</text>
+    
+    <!-- Sell PnL Box -->
+    <g transform="translate(700, 0)">
+      <rect width="200" height="80" class="calc-box" />
+      <text x="10" y="20" class="calc-title">TRADE EXECUTION</text>
+      <text x="10" y="35" class="calc-val"> proceeds: $18,000</text>
+      <text x="10" y="50" class="calc-val">- cost:    $ 9,000</text>
+      <text x="10" y="70" class="calc-val val-pos">Realized Gain: +$9,000</text>
+    </g>
+  </g>
+
+  <!-- ========================
+       SECTION 4: Net Summary
+       ======================== -->
+  <g transform="translate(700, 500)">
+    <!-- Connecting lines -->
+    <!-- From Fee Box center (700+100, 220+10+30 = 260) to here -->
+    <!-- From Sell Box center (700+100, 350+40 = 390) to here -->
+    
+    <rect width="200" height="60" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="4" />
+    <text x="100" y="25" text-anchor="middle" class="calc-title" fill="#15803d">NET P&amp;L</text>
+    <text x="100" y="48" text-anchor="middle" font-family="JetBrains Mono" font-size="18" font-weight="bold" fill="#15803d">+$8,000</text>
+  </g>
+
+</svg>

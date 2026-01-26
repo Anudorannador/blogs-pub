@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap');
+      
+      .bg { fill: #ffffff; }
+      
+      /* Tracks */
+      .track { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 2; rx: 10; }
+      .label-track { font-size: 14px; font-weight: bold; fill: #94a3b8; font-family: 'Inter', sans-serif; }
+      
+      /* Lots */
+      .lot-principal { fill: #dbeafe; stroke: #2563eb; stroke-width: 2; rx: 6; }
+      .lot-reward { fill: #fef9c3; stroke: #ca8a04; stroke-width: 2; rx: 6; } /* Yellow */
+      
+      .text-qty { font-family: 'Inter', sans-serif; font-weight: bold; font-size: 16px; fill: #1e3a8a; }
+      .text-reward-qty { font-family: 'Inter', sans-serif; font-weight: bold; font-size: 16px; fill: #854d0e; }
+      
+      .text-basis { font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.8; fill: #1e40af; }
+      .text-reward-basis { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: bold; fill: #a16207; }
+
+      /* Action Labels */
+      .action-title { font-size: 16px; font-weight: bold; fill: #0f172a; font-family: 'Inter', sans-serif; }
+      .action-desc { font-size: 13px; fill: #64748b; font-family: 'Inter', sans-serif; }
+
+      /* Arrows */
+      .arrow-incoming { fill: none; stroke: #ca8a04; stroke-width: 2; marker-end: url(#arrowHeadGold); stroke-dasharray: 4; }
+      .arrow-out { fill: none; stroke: #cbd5e1; stroke-width: 2; marker-end: url(#arrowHead); }
+
+      /* PnL Box */
+      .pnl-box { fill: #ffffff; stroke: #ca8a04; stroke-width: 2; rx: 4; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.05)); }
+      .pnl-title { font-size: 12px; font-weight: bold; fill: #ca8a04; font-family: 'Inter', sans-serif; text-transform: uppercase; }
+      .pnl-text { font-family: 'JetBrains Mono', monospace; font-size: 13px; fill: #334155; }
+      .val-pos { fill: #166534; font-weight: bold; }
+      
+      /* Tags */
+      .tag-zero { fill: #000; rx: 4; }
+      .tag-text { fill: #fff; font-size: 11px; font-weight: bold; font-family: 'Inter', sans-serif; text-anchor: middle; }
+
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#cbd5e1" />
+    </marker>
+    <marker id="arrowHeadGold" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ca8a04" />
+    </marker>
+  </defs>
+
+  <rect width="1000" height="500" class="bg" />
+
+  <text x="50" y="40" font-size="20" font-weight="bold" font-family="sans-serif" fill="#0f172a">Staking Rewards: Zero-Cost Basis Strategy</text>
+
+  <!-- ========================
+       STEP 1: Holding Principal
+       ======================== -->
+  <g transform="translate(50, 80)">
+    <text x="0" y="20" class="action-title">1. Staked Position</text>
+    <text x="0" y="40" class="action-desc">Principal is locked but owned.</text>
+    
+    <rect x="250" y="0" width="400" height="70" class="track" />
+    <text x="260" y="40" class="label-track">WALLET / VAULT</text>
+    
+    <!-- Principal Lot -->
+    <g transform="translate(450, 10)">
+      <rect width="140" height="50" class="lot-principal" />
+      <text x="70" y="20" text-anchor="middle" class="text-qty">1,000 DOT</text>
+      <text x="70" y="40" text-anchor="middle" class="text-basis">Basis: $5,000</text>
+    </g>
+  </g>
+
+  <!-- ========================
+       STEP 2: Reward Payout
+       ======================== -->
+  <g transform="translate(50, 200)">
+    <text x="0" y="20" class="action-title">2. Reward Payout</text>
+    <text x="0" y="40" class="action-desc">Income received. Policy: Cost = $0.</text>
+    
+    <rect x="250" y="0" width="400" height="70" class="track" />
+    
+    <!-- Principal Lot (Still there) -->
+    <g transform="translate(450, 10)">
+      <rect width="140" height="50" class="lot-principal" opacity="0.5" />
+      <text x="70" y="20" text-anchor="middle" class="text-qty" opacity="0.6">1,000 DOT</text>
+    </g>
+    
+    <!-- Incoming Arrow -->
+    <path d="M 330 -40 L 330 20" class="arrow-incoming" />
+    <text x="340" y="-10" font-size="12" fill="#ca8a04" font-weight="bold">Rewards</text>
+
+    <!-- Reward Lot -->
+    <!-- Inserted at front of queue (or back, depending on logic, usually distinct lot) -->
+    <g transform="translate(260, 10)">
+      <rect width="140" height="50" class="lot-reward" />
+      <text x="70" y="20" text-anchor="middle" class="text-reward-qty">50 DOT</text>
+      
+      <!-- Basis Label -->
+      <rect x="35" y="28" width="70" height="18" class="tag-zero" />
+      <text x="70" y="41" class="tag-text">BASIS $0</text>
+    </g>
+  </g>
+
+  <!-- ========================
+       STEP 3: Sell Reward
+       ======================== -->
+  <g transform="translate(50, 320)">
+    <text x="0" y="20" class="action-title">3. Sell Reward to Fiat</text>
+    <text x="0" y="40" class="action-desc">50 DOT sold @ $8/unit.</text>
+    
+    <rect x="250" y="0" width="400" height="70" class="track" />
+    
+    <!-- Principal Lot (Still there) -->
+    <g transform="translate(450, 10)">
+      <rect width="140" height="50" class="lot-principal" opacity="0.5" />
+      <text x="70" y="20" text-anchor="middle" class="text-qty" opacity="0.6">1,000 DOT</text>
+    </g>
+    
+    <!-- Reward Lot Moving Out -->
+    <g transform="translate(260, 10)">
+       <path d="M 70 60 L 70 90" class="arrow-out" />
+       
+       <rect width="140" height="50" class="lot-reward" stroke-dasharray="4" opacity="0.6" />
+       <text x="70" y="20" text-anchor="middle" class="text-reward-qty">50 DOT</text>
+    </g>
+    
+    <!-- Calculation Box -->
+    <g transform="translate(350, 90)">
+       <rect width="220" height="80" class="pnl-box" />
+       
+       <text x="15" y="25" class="pnl-title">Realized Gain Calculation</text>
+       <text x="15" y="45" class="pnl-text">Proceeds: 50 * $8 = $400</text>
+       <text x="15" y="60" class="pnl-text">Cost Basis:         $  0</text>
+       <line x1="15" y1="65" x2="200" y2="65" stroke="#cbd5e1" stroke-width="1" />
+       <text x="15" y="80" class="pnl-text val-pos">Profit:           +$400</text>
+    </g>
+  </g>
+
+</svg>
