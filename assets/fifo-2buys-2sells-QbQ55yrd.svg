@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 550">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap');
+      
+      .bg { fill: #ffffff; }
+      
+      /* Conveyor / Queue Styles */
+      .queue-track { fill: #f1f5f9; stroke: #e2e8f0; stroke-width: 2; rx: 10; }
+      .queue-label { font-size: 12px; font-weight: bold; fill: #94a3b8; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+      
+      /* Lots */
+      .lot-box { stroke-width: 2; rx: 6; cursor: default; }
+      .lot-a { fill: #dbeafe; stroke: #2563eb; } /* Blue */
+      .lot-b { fill: #ffedd5; stroke: #ea580c; } /* Orange */
+      
+      .lot-content-text { font-family: 'Inter', sans-serif; font-weight: bold; font-size: 16px; }
+      .lot-a-text { fill: #1e40af; }
+      .lot-b-text { fill: #9a3412; }
+      
+      .lot-cost-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.8; }
+      
+      /* Calculator / Action area */
+      .calc-line { stroke: #cbd5e1; stroke-width: 2; stroke-dasharray: 4; fill: none; }
+      .action-label { font-size: 16px; font-weight: bold; fill: #0f172a; font-family: 'Inter', sans-serif; }
+      .math-box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1; rx: 4; }
+      .math-text { font-family: 'JetBrains Mono', monospace; font-size: 13px; fill: #334155; }
+      
+      .result-pos { fill: #166534; font-weight: bold; }
+      .result-neg { fill: #b91c1c; font-weight: bold; }
+      .result-total { fill: #000; font-weight: bold; font-size: 18px; }
+      
+      /* Arrows */
+      .arrow { fill: #cbd5e1; }
+      .subtitle { font-size: 14px; font-family: 'Inter', sans-serif; fill: #64748b; }
+      
+      /* Summary Box */
+      .summary-box { fill: #f0fdf4; stroke: #16a34a; stroke-width: 2; rx: 8; }
+      .summary-title { font-size: 14px; font-weight: bold; fill: #15803d; font-family: 'Inter', sans-serif; text-transform: uppercase; }
+      .summary-value { font-size: 20px; font-weight: bold; fill: #15803d; font-family: 'JetBrains Mono', monospace; }
+      
+      /* Connector lines for total */
+      .connector-path { fill: none; stroke: #cbd5e1; stroke-width: 2; stroke-dasharray: 4; }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="550" class="bg" />
+
+  <!-- ===============================
+       STEP 1: Buy A
+       =============================== -->
+  <g transform="translate(50, 30)">
+    <text x="0" y="20" class="action-label" fill="#2563eb">1. Buy 1.0 ETH @ 2,000 USDT</text>
+    
+    <!-- The Queue Track -->
+    <rect x="280" y="0" width="400" height="60" class="queue-track" />
+    <text x="290" y="35" class="queue-label">IN</text>
+    <text x="640" y="35" class="queue-label">OUT</text>
+    
+    <!-- Lot A entering -->
+    <g transform="translate(560, 5)"> <!-- Positioned at front (Right side of queue) -->
+      <rect width="110" height="50" class="lot-box lot-a" />
+      <text x="55" y="22" text-anchor="middle" class="lot-content-text lot-a-text">Lot 1</text>
+      <text x="55" y="40" text-anchor="middle" class="lot-content-text lot-a-text lot-cost-label">2,000 USDT</text>
+    </g>
+  </g>
+
+  <!-- ===============================
+       STEP 2: Buy B
+       =============================== -->
+  <g transform="translate(50, 130)">
+    <text x="0" y="20" class="action-label" fill="#ea580c">2. Buy 1.0 ETH @ 3,000 USDT</text>
+    
+    <rect x="280" y="0" width="400" height="60" class="queue-track" />
+    <text x="290" y="35" class="queue-label">IN</text>
+    <text x="640" y="35" class="queue-label">OUT</text>
+    
+    <!-- Lot A (Still at front) -->
+    <g transform="translate(560, 5)">
+      <rect width="110" height="50" class="lot-box lot-a" />
+      <text x="55" y="22" text-anchor="middle" class="lot-content-text lot-a-text">Lot 1</text>
+      <text x="55" y="40" text-anchor="middle" class="lot-content-text lot-a-text lot-cost-label">2,000 USDT</text>
+    </g>
+    
+    <!-- Lot B (Queued behind A) -->
+    <g transform="translate(440, 5)">
+      <rect width="110" height="50" class="lot-box lot-b" />
+      <text x="55" y="22" text-anchor="middle" class="lot-content-text lot-b-text">Lot 2</text>
+      <text x="55" y="40" text-anchor="middle" class="lot-content-text lot-b-text lot-cost-label">3,000 USDT</text>
+    </g>
+    
+    <!-- Helper Text -->
+    <path d="M 410 30 L 430 30" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowHead)" />
+    <text x="400" y="35" text-anchor="end" class="subtitle" font-size="12">Pushed in</text>
+  </g>
+
+  <!-- ===============================
+       STEP 3: Sell 1
+       =============================== -->
+  <g transform="translate(50, 230)">
+    <text x="0" y="20" class="action-label">3. Sell 1.0 ETH @ 2,500 USDT</text>
+    
+    <rect x="280" y="0" width="400" height="60" class="queue-track" />
+    <text x="290" y="35" class="queue-label">IN</text>
+    <text x="640" y="35" class="queue-label">OUT</text>
+    
+    <!-- Lot B (In position 2) -->
+    <g transform="translate(440, 5)">
+      <rect width="110" height="50" class="lot-box lot-b" />
+      <text x="55" y="22" text-anchor="middle" class="lot-content-text lot-b-text">Lot 2</text>
+      <text x="55" y="40" text-anchor="middle" class="lot-content-text lot-b-text lot-cost-label">3,000 USDT</text>
+    </g>
+
+    <!-- Lot A (Pulled OUT) -->
+    <g transform="translate(720, 5)">
+       <path d="M -50 25 L -10 25" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowHead)" />
+       
+       <rect width="110" height="50" class="lot-box lot-a" stroke-dasharray="4" opacity="0.6" />
+       <text x="55" y="22" text-anchor="middle" class="lot-content-text lot-a-text">Lot 1</text>
+       <text x="55" y="40" text-anchor="middle" class="lot-content-text lot-a-text lot-cost-label">Cost: 2k USDT</text>
+    </g>
+    
+    <!-- The Calculation Bubble -->
+    <g transform="translate(710, 70)">
+       <rect x="0" y="0" width="220" height="50" class="math-box" />
+       <text x="10" y="20" class="math-text">Sell Price: 2,500 USDT</text>
+       <text x="10" y="38" class="math-text"> - Cost:    2,000 USDT (Lot 1)</text>
+       <text x="140" y="30" class="math-text result-pos" font-size="16">+500 USDT</text>
+       
+       <!-- Connector from box A -->
+       <path d="M 65  -15 L 65 0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2" />
+    </g>
+  </g>
+
+  <!-- ===============================
+       STEP 4: Sell 2
+       =============================== -->
+  <!-- Shifted down from 330 to 380 to avoid overlap -->
+  <g transform="translate(50, 380)">
+    <text x="0" y="20" class="action-label">4. Sell 1.0 ETH @ 2,800 USDT</text>
+    
+    <rect x="280" y="0" width="400" height="60" class="queue-track" />
+    <text x="290" y="35" class="queue-label">IN</text>
+    <text x="640" y="35" class="queue-label">OUT</text>
+    
+    <!-- Lot B has shifted to front and is now being pulled out -->
+    <g transform="translate(720, 5)">
+       <path d="M -50 25 L -10 25" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowHead)" />
+       
+       <rect width="110" height="50" class="lot-box lot-b" stroke-dasharray="4" opacity="0.6" />
+       <text x="55" y="22" text-anchor="middle" class="lot-content-text lot-b-text">Lot 2</text>
+       <text x="55" y="40" text-anchor="middle" class="lot-content-text lot-b-text lot-cost-label">Cost: 3k USDT</text>
+    </g>
+    
+    <!-- Empty Queue -->
+    <text x="500" y="35" text-anchor="middle" class="subtitle" font-style="italic">(Queue Empty)</text>
+
+    <!-- The Calculation Bubble -->
+    <g transform="translate(710, 70)">
+       <rect x="0" y="0" width="220" height="50" class="math-box" />
+       <text x="10" y="20" class="math-text">Sell Price: 2,800 USDT</text>
+       <text x="10" y="38" class="math-text"> - Cost:    3,000 USDT (Lot 2)</text>
+       <text x="140" y="30" class="math-text result-neg" font-size="16">-200 USDT</text>
+       
+       <path d="M 65 -15 L 65 0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2" />
+    </g>
+  </g>
+  
+  <!-- ===============================
+       TOTAL SUMMATION COLUMN
+       =============================== -->
+       
+  <!-- Connector lines to Total -->
+  <!-- Step 3 result Y = 230 + 70 + 25 = 325 approx -->
+  <!-- Step 4 result Y = 380 + 70 + 25 = 475 approx -->
+  <!-- Total Box Center Y = (325 + 475)/2 = 400 -->
+
+  <path d="M 930 325 C 950 325, 950 400, 960 400" class="connector-path" />
+  <path d="M 930 475 C 950 475, 950 400, 960 400" class="connector-path" />
+  
+  <!-- Total Box -->
+  <g transform="translate(960, 370)">
+    <rect x="0" y="0" width="120" height="60" class="summary-box" />
+    <text x="50" y="20" text-anchor="middle" class="summary-title">Total P&amp;L</text>
+    <text x="50" y="45" text-anchor="middle" class="summary-value">+300 USDT</text>
+  </g>
+
+</svg>
